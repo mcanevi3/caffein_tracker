@@ -1,6 +1,7 @@
 import 'package:caffeine_tracker/database_helper.dart';
 import 'package:caffeine_tracker/widgets/coffee_list_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CoffeeAddWidget extends StatefulWidget {
   final VoidCallback onCoffeeAdded;
@@ -31,6 +32,10 @@ class _CoffeeAddWidgetState extends State<CoffeeAddWidget> {
         ),
         const SizedBox(height: 16),
         TextField(
+          keyboardType: TextInputType.number,
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.digitsOnly,
+          ],
           controller: caffeineController,
           decoration: const InputDecoration(labelText: "Caffeine (mg)"),
         ),
