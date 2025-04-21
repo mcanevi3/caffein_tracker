@@ -1,44 +1,92 @@
-import 'package:caffeine_tracker/widgets/coffee_add_widget.dart';
 import 'package:flutter/material.dart';
 import 'widgets/coffee_list_widget.dart';
+import 'widgets/coffee_add_widget.dart';
+
+enum AppPage { addCoffee, viewCoffee }
 
 void main() {
-  runApp(const CoffeeApp());
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Caffeine Tracker',
+      home: const CoffeeApp(),
+    ),
+  );
 }
 
-class CoffeeApp extends StatelessWidget {
+class CoffeeApp extends StatefulWidget {
   const CoffeeApp({super.key});
+
+  @override
+  State<CoffeeApp> createState() => _CoffeeAppState();
+}
+
+class _CoffeeAppState extends State<CoffeeApp> {
+  AppPage _selectedPage = AppPage.viewCoffee;
+  final GlobalKey<CoffeeListWidgetState> _coffeeListKey = GlobalKey();
+
+  void _onCoffeeAdded() {
+    _coffeeListKey.currentState?.refresh();
+    setState(() {
+      _selectedPage = AppPage.viewCoffee;
+    });
+  }
+
+  Widget _buildBody() {
+    switch (_selectedPage) {
+      case AppPage.addCoffee:
+        return CoffeeAddWidget(onCoffeeAdded: _onCoffeeAdded);
+      case AppPage.viewCoffee:
+        return CoffeeListWidget(key: _coffeeListKey);
+    }
+  }
+
+  void _selectPage(AppPage page) {
+    setState(() {
+      _selectedPage = page;
+    });
+  }
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Caffein tracking', home: CoffeeHomeScreen());
-  }
-}
-
-class CoffeeHomeScreen extends StatelessWidget {
-  CoffeeHomeScreen({super.key});
-  final GlobalKey<CoffeeListWidgetState> _coffeeListKey =
-      GlobalKey<CoffeeListWidgetState>();
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Add your drink!")),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            CoffeeListWidget(key: _coffeeListKey),
-            SizedBox(height: 16),
-            CoffeeAddWidget(
-              onCoffeeAdded: () {
-                _coffeeListKey.currentState?.refresh();
-              },
-            ),
-          ],
+      drawer: Drawer(
+        child: Builder(
+          builder: (drawerContext) {
+            return ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                DrawerHeader(
+                  decoration: BoxDecoration(color: Colors.brown[200]),
+                  child: const Text(
+                    "Menu",
+                    style: TextStyle(color: Colors.white, fontSize: 24),
+                  ),
+                ),
+                ListTile(
+                  leading: const Icon(Icons.add),
+                  title: Text("Add Coffee"),
+                  onTap: () {
+                    Navigator.pop(drawerContext);
+                    _selectPage(AppPage.addCoffee);
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.local_cafe),
+                  title: Text("View Coffees"),
+                  onTap: () {
+                    Navigator.pop(drawerContext);
+                    _selectPage(AppPage.viewCoffee);
+                  },
+                ),
+              ],
+            );
+          },
         ),
       ),
+      body: _buildBody(),
     );
   }
 }

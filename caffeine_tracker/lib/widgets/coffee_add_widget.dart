@@ -1,5 +1,4 @@
 import 'package:caffeine_tracker/database_helper.dart';
-import 'package:caffeine_tracker/widgets/coffee_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -19,29 +18,32 @@ class _CoffeeAddWidgetState extends State<CoffeeAddWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TextField(
-          controller: brandController,
-          decoration: const InputDecoration(labelText: "Drink Brand"),
-        ),
-        const SizedBox(height: 16),
-        TextField(
-          controller: nameController,
-          decoration: const InputDecoration(labelText: "Drink Name"),
-        ),
-        const SizedBox(height: 16),
-        TextField(
-          keyboardType: TextInputType.number,
-          inputFormatters: <TextInputFormatter>[
-            FilteringTextInputFormatter.digitsOnly,
-          ],
-          controller: caffeineController,
-          decoration: const InputDecoration(labelText: "Caffeine (mg)"),
-        ),
-        const SizedBox(height: 16),
-        ElevatedButton(onPressed: _addDrink, child: Text("Add Drink")),
-      ],
+    return SingleChildScrollView(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        children: [
+          TextField(
+            controller: brandController,
+            decoration: const InputDecoration(labelText: "Drink Brand"),
+          ),
+          const SizedBox(height: 16),
+          TextField(
+            controller: nameController,
+            decoration: const InputDecoration(labelText: "Drink Name"),
+          ),
+          const SizedBox(height: 16),
+          TextField(
+            keyboardType: TextInputType.number,
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.digitsOnly,
+            ],
+            controller: caffeineController,
+            decoration: const InputDecoration(labelText: "Caffeine (mg)"),
+          ),
+          const SizedBox(height: 16),
+          ElevatedButton(onPressed: _addDrink, child: Text("Add Drink")),
+        ],
+      ),
     );
   }
 
