@@ -45,6 +45,11 @@ class DatabaseHelper {
     });
   }
 
+  Future<void> deleteCoffee(id) async {
+    final db = await database;
+    await db.delete('coffees', where: 'uuid=?', whereArgs: [id]);
+  }
+
   Future<List<Map<String, dynamic>>> getAllCoffees() async {
     final db = await database;
     // final path = join(await getDatabasesPath(), 'caffeine_tracker.db');

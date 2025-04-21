@@ -1,3 +1,4 @@
+import 'package:caffeine_tracker/widgets/coffee_editable_item.dart';
 import 'package:flutter/material.dart';
 import '../database_helper.dart';
 
@@ -38,13 +39,48 @@ class CoffeeListWidgetState extends State<CoffeeListWidget> {
       itemCount: _coffees.length,
       itemBuilder: (context, index) {
         final coffee = _coffees[index];
-        return Card(
-          child: ListTile(
-            title: Text(coffee['name']),
-            subtitle: Text('${coffee['brand']} - ${coffee['caffeine']} mg'),
-          ),
+        return CoffeeEditableItem(
+          id: coffee['uuid'] ?? "",
+          brand: coffee['brand'] ?? "",
+          name: coffee['name'] ?? "",
+          caffeine: coffee['caffeine'].toString(),
+          actionDelete: _deleteItem,
+          deleteMsg: "Deleted from database!",
         );
+        // return Card(
+        //   child: ListTile(
+        //     title: Text(coffee['name']),
+        //     subtitle: Text(
+        //       '${coffee['brand']} - ${coffee['caffeine']} mg ${coffee['uuid']}',
+        //     ),
+        //     trailing: SizedBox(
+        //       width: 80,
+        //       child: Row(
+        //         children: [
+        //           IconButton(onPressed: () {}, icon: const Icon(Icons.draw)),
+        //           IconButton(
+        //             onPressed: () {
+        //               _deleteItem(coffee['uuid']);
+        //               refresh();
+        //               ScaffoldMessenger.of(context).showSnackBar(
+        //                 const SnackBar(
+        //                   content: Text("Deleted from the database!"),
+        //                 ),
+        //               );
+        //             },
+        //             icon: const Icon(Icons.delete),
+        //           ),
+        //         ],
+        //       ),
+        //     ),
+        //   ),
+        // );
       },
     );
+  }
+
+  void _deleteItem(String id) {
+    DatabaseHelper.instance.deleteCoffee(id);
+    refresh();
   }
 }

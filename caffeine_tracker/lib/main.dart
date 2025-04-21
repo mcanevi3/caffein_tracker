@@ -51,7 +51,7 @@ class _CoffeeAppState extends State<CoffeeApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Add your drink!")),
+      appBar: AppBar(),
       drawer: Drawer(
         child: Builder(
           builder: (drawerContext) {
