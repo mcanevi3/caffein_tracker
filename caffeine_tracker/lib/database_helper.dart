@@ -28,7 +28,7 @@ class DatabaseHelper {
     uuid TEXT PRIMARY KEY,
     name TEXT,
     brand TEXT,
-    caffein INTEGER
+    caffeine INTEGER
     )
     ''');
   }
@@ -47,6 +47,8 @@ class DatabaseHelper {
 
   Future<List<Map<String, dynamic>>> getAllCoffees() async {
     final db = await database;
+    // final path = join(await getDatabasesPath(), 'caffeine_tracker.db');
+    // print('DB Path: $path');
     return await db.query('coffees');
   }
 }

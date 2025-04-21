@@ -4,11 +4,15 @@ import '../database_helper.dart';
 class CoffeeListWidget extends StatefulWidget {
   const CoffeeListWidget({super.key});
   @override
-  State<CoffeeListWidget> createState() => _CoffeeListWidgetState();
+  State<CoffeeListWidget> createState() => CoffeeListWidgetState();
 }
 
-class _CoffeeListWidgetState extends State<CoffeeListWidget> {
+class CoffeeListWidgetState extends State<CoffeeListWidget> {
   List<Map<String, dynamic>> _coffees = [];
+
+  void refresh() {
+    _loadCoffees();
+  }
 
   @override
   void initState() {
@@ -30,6 +34,7 @@ class _CoffeeListWidgetState extends State<CoffeeListWidget> {
     }
 
     return ListView.builder(
+      shrinkWrap: true,
       itemCount: _coffees.length,
       itemBuilder: (context, index) {
         final coffee = _coffees[index];
