@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'widgets/coffee_list_widget.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const CoffeeApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class CoffeeApp extends StatelessWidget {
+  const CoffeeApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -45,7 +46,6 @@ class _DrinkLoggerScreenState extends State<DrinkLoggerScreen> {
         const SnackBar(content: Text("Please enter valid caffeine data!")),
       );
     }
-
     print("$caffeine mg");
   }
 
@@ -69,6 +69,8 @@ class _DrinkLoggerScreenState extends State<DrinkLoggerScreen> {
             ),
             const SizedBox(height: 24),
             ElevatedButton(onPressed: _logDrink, child: Text("Log drink")),
+            const SizedBox(height: 24),
+            const Expanded(child: CoffeeListWidget()),
           ],
         ),
       ),
