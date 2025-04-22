@@ -34,12 +34,13 @@ class DatabaseHelper {
   }
 
   Future<void> deleteAllCoffees() async {
-    // final db = await database;
-    // await db.delete("coffees");
-    final dbPath = await getDatabasesPath();
-    final path = join(dbPath, 'caffeine_tracker.db');
+    final db = await database;
+    await db.delete("coffees");
+    // final dbPath = await getDatabasesPath();
+    // final path = join(dbPath, 'caffeine_tracker.db');
 
-    deleteDatabase(path);
+    // await deleteDatabase(path);
+    // await _initDB();
   }
 
   Future<void> insertCoffee(String name, String brand, int caffeine) async {
@@ -77,8 +78,8 @@ class DatabaseHelper {
 
   Future<List<Map<String, dynamic>>> getAllCoffees() async {
     final db = await database;
-    // final path = join(await getDatabasesPath(), 'caffeine_tracker.db');
-    // print('DB Path: $path');
+    final path = join(await getDatabasesPath(), 'caffeine_tracker.db');
+    print('DB Path: $path');
     return await db.query('coffees');
   }
 }

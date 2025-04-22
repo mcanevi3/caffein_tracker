@@ -12,8 +12,8 @@ class CoffeeAddWidget extends StatefulWidget {
 }
 
 class _CoffeeAddWidgetState extends State<CoffeeAddWidget> {
-  final TextEditingController brandController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController brandController = TextEditingController();
   final TextEditingController caffeineController = TextEditingController();
 
   @override
@@ -23,13 +23,13 @@ class _CoffeeAddWidgetState extends State<CoffeeAddWidget> {
       child: Column(
         children: [
           TextField(
-            controller: brandController,
-            decoration: const InputDecoration(labelText: "Drink Brand"),
+            controller: nameController,
+            decoration: const InputDecoration(labelText: "Drink Name"),
           ),
           const SizedBox(height: 16),
           TextField(
-            controller: nameController,
-            decoration: const InputDecoration(labelText: "Drink Name"),
+            controller: brandController,
+            decoration: const InputDecoration(labelText: "Drink Brand"),
           ),
           const SizedBox(height: 16),
           TextField(
@@ -48,19 +48,19 @@ class _CoffeeAddWidgetState extends State<CoffeeAddWidget> {
   }
 
   void _addDrink() {
-    final String brand = brandController.text;
     final String name = nameController.text;
+    final String brand = brandController.text;
     final String caffeinText = caffeineController.text;
 
-    if (brand.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Please fill in the brand field!")),
-      );
-      return;
-    }
     if (name.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Please fill in the name field!")),
+      );
+      return;
+    }
+    if (brand.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Please fill in the brand field!")),
       );
       return;
     }
@@ -83,8 +83,8 @@ class _CoffeeAddWidgetState extends State<CoffeeAddWidget> {
       context,
     ).showSnackBar(const SnackBar(content: Text("Added to the database!")));
 
-    brandController.clear();
     nameController.clear();
+    brandController.clear();
     caffeineController.clear();
     widget.onCoffeeAdded();
   }
