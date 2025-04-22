@@ -1,4 +1,4 @@
-import 'package:caffeine_tracker/database_helper.dart';
+import 'package:caffeine_tracker/coffee_database_helper.dart';
 import 'package:flutter/material.dart';
 
 class CoffeeSettings extends StatefulWidget {
@@ -15,7 +15,7 @@ class _CoffeeSettingsState extends State<CoffeeSettings> {
       children: [
         ElevatedButton(
           onPressed: () {
-            DatabaseHelper.instance.deleteAllCoffees();
+            CoffeeDatabaseHelper.instance.deleteAllCoffees();
           },
           child: Row(
             children: [

@@ -1,6 +1,6 @@
 import 'package:caffeine_tracker/widgets/coffee_editable_item.dart';
 import 'package:flutter/material.dart';
-import '../database_helper.dart';
+import '../coffee_database_helper.dart';
 
 class CoffeeListWidget extends StatefulWidget {
   const CoffeeListWidget({super.key});
@@ -22,7 +22,7 @@ class CoffeeListWidgetState extends State<CoffeeListWidget> {
   }
 
   void _loadCoffees() async {
-    final coffees = await DatabaseHelper.instance.getAllCoffees();
+    final coffees = await CoffeeDatabaseHelper.instance.getAllCoffees();
     setState(() {
       _coffees = coffees;
     });
@@ -54,7 +54,7 @@ class CoffeeListWidgetState extends State<CoffeeListWidget> {
   }
 
   void _updateItem(String id, String brand, String name, String caffeine) {
-    DatabaseHelper.instance.updateCoffee(
+    CoffeeDatabaseHelper.instance.updateCoffee(
       id,
       name,
       brand,
@@ -64,7 +64,7 @@ class CoffeeListWidgetState extends State<CoffeeListWidget> {
   }
 
   void _deleteItem(String id) {
-    DatabaseHelper.instance.deleteCoffee(id);
+    CoffeeDatabaseHelper.instance.deleteCoffee(id);
     refresh();
   }
 }

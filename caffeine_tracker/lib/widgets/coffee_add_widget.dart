@@ -1,4 +1,4 @@
-import 'package:caffeine_tracker/database_helper.dart';
+import 'package:caffeine_tracker/coffee_database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -78,7 +78,7 @@ class _CoffeeAddWidgetState extends State<CoffeeAddWidget> {
       );
       return;
     }
-    DatabaseHelper.instance.insertCoffee(name, brand, caffeine);
+    CoffeeDatabaseHelper.instance.insertCoffee(name, brand, caffeine);
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(const SnackBar(content: Text("Added to the database!")));

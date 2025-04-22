@@ -4,10 +4,10 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:uuid/uuid.dart';
 
-class DatabaseHelper {
-  static final DatabaseHelper instance = DatabaseHelper._internal();
-  factory DatabaseHelper() => instance;
-  DatabaseHelper._internal();
+class CoffeeDatabaseHelper {
+  static final CoffeeDatabaseHelper instance = CoffeeDatabaseHelper._internal();
+  factory CoffeeDatabaseHelper() => instance;
+  CoffeeDatabaseHelper._internal();
 
   static Database? _db;
 
