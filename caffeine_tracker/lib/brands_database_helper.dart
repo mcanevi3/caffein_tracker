@@ -27,8 +27,7 @@ class BrandsDatabaseHelper {
     CREATE TABLE brands (
     uuid TEXT PRIMARY KEY,
     name TEXT,
-    logo TEXT,
-    )
+    logo TEXT)
     ''');
   }
 
