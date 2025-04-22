@@ -32,14 +32,14 @@ class _BrandsAddState extends State<BrandsAdd> {
                 });
               },
               items:
-                  ["Starbucks", "Burger King", "Pepsi"]
+                  ["Starbucks", "Kahve Dünyası"]
                       .map(
                         (brand) => DropdownMenuItem<String>(
                           value: brand,
                           child: Row(
                             children: [
                               Image.asset(
-                                "lib/assets/logos/starbucks.png",
+                                "lib/assets/logos/${getAssetName(brand)}.png",
                                 width: 24,
                                 height: 24,
                               ),
@@ -56,5 +56,9 @@ class _BrandsAddState extends State<BrandsAdd> {
         ElevatedButton(onPressed: () {}, child: Text("Add Brand")),
       ],
     );
+  }
+
+  String getAssetName(String brand) {
+    return brand.toLowerCase().replaceAll(' ', '');
   }
 }
