@@ -46,37 +46,21 @@ class CoffeeListWidgetState extends State<CoffeeListWidget> {
           caffeine: coffee['caffeine'].toString(),
           actionDelete: _deleteItem,
           deleteMsg: "Deleted from database!",
+          actionUpdate: _updateItem,
+          updateMsg: "Database updated!",
         );
-        // return Card(
-        //   child: ListTile(
-        //     title: Text(coffee['name']),
-        //     subtitle: Text(
-        //       '${coffee['brand']} - ${coffee['caffeine']} mg ${coffee['uuid']}',
-        //     ),
-        //     trailing: SizedBox(
-        //       width: 80,
-        //       child: Row(
-        //         children: [
-        //           IconButton(onPressed: () {}, icon: const Icon(Icons.draw)),
-        //           IconButton(
-        //             onPressed: () {
-        //               _deleteItem(coffee['uuid']);
-        //               refresh();
-        //               ScaffoldMessenger.of(context).showSnackBar(
-        //                 const SnackBar(
-        //                   content: Text("Deleted from the database!"),
-        //                 ),
-        //               );
-        //             },
-        //             icon: const Icon(Icons.delete),
-        //           ),
-        //         ],
-        //       ),
-        //     ),
-        //   ),
-        // );
       },
     );
+  }
+
+  void _updateItem(String id, String brand, String name, String caffeine) {
+    DatabaseHelper.instance.updateCoffee(
+      id,
+      name,
+      brand,
+      int.tryParse(caffeine) ?? 0,
+    );
+    refresh();
   }
 
   void _deleteItem(String id) {

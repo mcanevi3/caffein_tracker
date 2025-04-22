@@ -33,6 +33,15 @@ class DatabaseHelper {
     ''');
   }
 
+  Future<void> deleteAllCoffees() async {
+    // final db = await database;
+    // await db.delete("coffees");
+    final dbPath = await getDatabasesPath();
+    final path = join(dbPath, 'caffeine_tracker.db');
+
+    deleteDatabase(path);
+  }
+
   Future<void> insertCoffee(String name, String brand, int caffeine) async {
     final db = await database;
     final uuid = const Uuid().v4();
@@ -43,6 +52,22 @@ class DatabaseHelper {
       'brand': brand,
       'caffeine': caffeine,
     });
+  }
+
+  Future<void> updateCoffee(
+    String id,
+    String name,
+    String brand,
+    int caffeine,
+  ) async {
+    final db = await database;
+
+    await db.update(
+      'coffees',
+      {'name': name, 'brand': brand, 'caffeine': caffeine},
+      where: 'uuid=?',
+      whereArgs: [id],
+    );
   }
 
   Future<void> deleteCoffee(id) async {

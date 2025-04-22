@@ -1,8 +1,9 @@
+import 'package:caffeine_tracker/widgets/coffee_settings.dart';
 import 'package:flutter/material.dart';
 import 'widgets/coffee_list_widget.dart';
 import 'widgets/coffee_add_widget.dart';
 
-enum AppPage { addCoffee, viewCoffee }
+enum AppPage { addCoffee, viewCoffee, settingsCoffee }
 
 void main() {
   runApp(
@@ -38,6 +39,8 @@ class _CoffeeAppState extends State<CoffeeApp> {
         return CoffeeAddWidget(onCoffeeAdded: _onCoffeeAdded);
       case AppPage.viewCoffee:
         return CoffeeListWidget(key: _coffeeListKey);
+      case AppPage.settingsCoffee:
+        return CoffeeSettings();
     }
   }
 
@@ -79,6 +82,14 @@ class _CoffeeAppState extends State<CoffeeApp> {
                   onTap: () {
                     Navigator.pop(drawerContext);
                     _selectPage(AppPage.viewCoffee);
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.settings),
+                  title: Text("Settings"),
+                  onTap: () {
+                    Navigator.pop(drawerContext);
+                    _selectPage(AppPage.settingsCoffee);
                   },
                 ),
               ],
