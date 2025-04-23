@@ -1,3 +1,4 @@
+import 'package:caffeine_tracker/brands_database_helper.dart';
 import 'package:caffeine_tracker/coffee_database_helper.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,7 @@ class _CoffeeSettingsState extends State<CoffeeSettings> {
         ElevatedButton(
           onPressed: () {
             CoffeeDatabaseHelper.instance.deleteAllCoffees();
+            BrandsDatabaseHelper.instance.deleteAllBrands();
           },
           child: Row(
             children: [

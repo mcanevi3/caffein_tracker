@@ -1,4 +1,5 @@
 import 'package:caffeine_tracker/widgets/brands_add.dart';
+import 'package:caffeine_tracker/widgets/brands_view_widget.dart';
 import 'package:caffeine_tracker/widgets/coffee_settings.dart';
 import 'package:flutter/material.dart';
 import 'widgets/coffee_list_widget.dart';
@@ -43,7 +44,12 @@ class _CoffeeAppState extends State<CoffeeApp> {
       case AppPage.settingsCoffee:
         return CoffeeSettings();
       case AppPage.addBrand:
-        return BrandsAdd();
+        return Column(
+          children: [
+            // BrandsViewWidget(),
+            BrandsAdd(),
+          ],
+        );
     }
   }
 
